@@ -7,43 +7,18 @@ Move all the unique elements at the beginning of the array and after moving retu
 */
 
 export function removeDuplicates(arr) {
-
-    if(arr.length == 0){
+    if(arr.length === 0){
         return 0;
     }
-    if(arr.length <= 1){
-        return 1;
-    }
-    let searcherPtr = 1;
-    let masterPtr = 0;
-    let currMasterVal;
-    let totalHits = 0;
-    while(searcherPtr < arr.length){
-        if(arr[masterPtr] == arr[searcherPtr]){
-            if(currMasterVal == arr[searcherPtr]) {
-                //this is the value we have encountered before. increment the searcher ptr
-                searcherPtr++;
-            }
-            else {
-                currMasterVal = arr[searcherPtr];
-                masterPtr++;
-                searcherPtr++;
-                totalHits++;
-            }
+
+    let nextNonDup = 1;
+    let i = 0;
+    while(i < arr.length){
+        if(arr[nextNonDup - 1] !== arr[i]){
+            arr[nextNonDup] = arr[i];
+            nextNonDup++;
         }
-        else {
-            if(currMasterVal == arr[searcherPtr]) {
-                //keep incremeting search but keep master the same
-                searcherPtr++;
-            }
-            else {
-                currMasterVal = arr[masterPtr];
-                arr[masterPtr] = arr[searcherPtr];
-                masterPtr++;
-                searcherPtr++;
-                totalHits++;
-            }
-        }
+        i++;
     }
-    return totalHits;
+    return nextNonDup;
 }
